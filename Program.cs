@@ -4,7 +4,17 @@ using ReservasAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DBReservasContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null
+            );
+        }));
+
 
 // Add services to the container.
 //builder.WebHost.UseUrls("http://*:80");

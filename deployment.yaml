@@ -3,31 +3,34 @@ kind: Deployment
 metadata:
   name: reservas-deployment
 spec:
-    replicas: 1
-    selector:
-      matchLabels:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservas
+  template:
+    metadata:
+      labels:
         app: reservas
-    template:
-        metadata:
-          labels:
-            app: reservas
-        spec:
-          containers:
-            - name: reservas-api
-              image: reservas-api:local
-              imagePullPolicy: IfNotPresent
-              ports:
-              - containerPort: 80
+    spec:
+      containers:
+        - name: reservas-api-kub
+          image: reservas-api-kub:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sqlserver-service;Database=DBReservasAPI;User Id=sa;Password=TG#67733200b;TrustServerCertificate=True;"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: reservas-service
 spec:
-    type: NodePort
-    selector:
-      app: reservas
-    ports:
-      - port: 80
-        targetPort: 80
-        nodePort: 30080
+  type: NodePort
+  selector:
+    app: reservas
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
