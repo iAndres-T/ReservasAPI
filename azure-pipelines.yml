@@ -1,0 +1,61 @@
+# ASP.NET Core 8 - Build & Publish
+# Para cuentas gratis de App Service usar --runtime win-x86
+
+trigger:
+    - main
+
+pool:
+    vmImage: "windows-latest"
+
+variables:
+    buildConfiguration: "Release"
+    proyecto: ReservasAPI/ReservasAPI.csproj
+
+steps:
+    - task: UseDotNet@2
+      displayName: "Instalar .NET SDK 8"
+      inputs:
+          packageType: "sdk"
+          # Usa siempre la última 8.0.x disponible en el agente
+          version: "8.0.x"
+          includePreviewVersions: true # Puede ser necesario para algunas versiones preliminares de .NET 8
+
+    - script: dotnet --info
+      displayName: "Información de .NET"
+
+    - script: dotnet restore $(proyecto)
+      displayName: "dotnet restore"
+
+    - script: dotnet build --configuration $(buildConfiguration) $(proyecto) --no-restore
+      displayName: "dotnet build $(buildConfiguration)"
+
+    - task: CmdLine@2
+      displayName: "Instalar EF Core CLI 8"
+      inputs:
+          script: |
+              dotnet tool install --global dotnet-ef --version 8.*
+      env:
+          PATH: $(PATH);$(USERPROFILE)\.dotnet\tools
+
+    - task: CmdLine@2
+      displayName: "Generar script de BD"
+      inputs:
+          script: |
+              dotnet ef migrations script -i -o "$(Build.ArtifactStagingDirectory)\migrate.sql" --project "$(proyecto)"
+
+    - task: DotNetCoreCLI@2
+      displayName: "Publicar aplicación"
+      inputs:
+          command: "publish"
+          publishWebProjects: false
+          projects: "$(proyecto)"
+          arguments: "--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) --runtime win-x86 --self-contained true"
+          zipAfterPublish: false
+          modifyOutputPath: false
+
+    - task: PublishBuildArtifacts@1
+      displayName: "Publicar artefactos"
+      inputs:
+          pathToPublish: "$(Build.ArtifactStagingDirectory)"
+          artifactName: "drop"
+          publishLocation: "Container"
