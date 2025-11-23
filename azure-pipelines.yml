@@ -37,12 +37,6 @@ steps:
       env:
           PATH: $(PATH);$(USERPROFILE)\.dotnet\tools
 
-    - task: CmdLine@2
-      displayName: "Generar script de BD"
-      inputs:
-          script: |
-              dotnet ef migrations script -i -o "$(Build.ArtifactStagingDirectory)\migrate.sql" --project "$(proyecto)"
-
     - task: DotNetCoreCLI@2
       displayName: "Publicar aplicación"
       inputs:
