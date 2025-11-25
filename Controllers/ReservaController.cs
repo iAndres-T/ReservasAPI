@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.ObjectPool;
 using ReservasAPI.Data;
 using ReservasAPI.Models;
+using System.Text;
 
 namespace ReservasAPI.Controllers
 {
@@ -33,6 +35,12 @@ namespace ReservasAPI.Controllers
                 // Aquí puedes loguear el error con algún logger (ej: Serilog, ILogger, etc.)
                 return StatusCode(500, $"Ocurrió un error al obtener las reservas: {ex.Message}");
             }
+        }
+
+        [HttpGet]
+        public string NewPipeline()
+        {
+            return "Cambio subido desde DevOps";
         }
 
 
