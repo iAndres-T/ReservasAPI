@@ -32,8 +32,7 @@ steps:
     - task: CmdLine@2
       displayName: "Instalar EF Core CLI 8"
       inputs:
-          script: |
-              dotnet tool install --global dotnet-ef --version 8.*
+          script: dotnet tool install --global dotnet-ef --version 8.*
       env:
           PATH: $(PATH);$(USERPROFILE)\.dotnet\tools
 
