@@ -37,10 +37,10 @@ namespace ReservasAPI.Controllers
             }
         }
 
-        [HttpGet("new-pipeline")]
+        [HttpGet("new-deployment")]
         public string NewPipeline()
         {
-            return "Cambio subido desde DevOps";
+            return "Cambio subido desde Releases Azure DevOps";
         }
 
 
