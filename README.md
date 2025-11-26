@@ -1,7 +1,8 @@
 ﻿# PRACTICA #4 - CI y CD Azure DevOps
 
 ## 👥 Integrantes
-- Andres Tabares Cardona  
+- Andres Tabares Cardona
+-  Efrén Felipe Cuadrado Barboza
 
 📄 **Enlace documento/video de evidencias:**  
 [Ver documento en Google Docs](https://docs.google.com/document/d/1JRslRKcLNnMpxGNvuXzU4hbyONH8tjxEUa6ieDpuAvw/edit?usp=drive_link)
