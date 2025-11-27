@@ -46,7 +46,7 @@ namespace ReservasAPI.Controllers
         [HttpGet("new-deployment-FMU")]
         public string NewPipeline2()
         {
-            return "Cambio subido desde Releases Azure DevOps FMU";
+            return "Realizo un cambio en el código FMU";
         }
 
 
