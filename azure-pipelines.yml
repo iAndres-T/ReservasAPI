@@ -2,7 +2,7 @@
 # Para cuentas gratis de App Service usar --runtime win-x86
 
 trigger:
-    - dev
+    - main
 
 pool:
     vmImage: "windows-latest"
