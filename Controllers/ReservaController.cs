@@ -40,7 +40,7 @@ namespace ReservasAPI.Controllers
         [HttpGet("new-deployment")]
         public string NewPipeline()
         {
-            return "Cambio subido desde Releases Azure DevOps";
+            return "Cambio subido desde Releases Azure DevOps 2";
         }
 
 
