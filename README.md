@@ -3,6 +3,7 @@
 ## 👥 Integrantes
 - Andres Tabares Cardona
 - Efrén Felipe Cuadrado Barboza
+- Franco Moncayo Uribe
 
 📄 **Enlace documento/video de evidencias:**  
 [Ver documento en Google Docs](https://docs.google.com/document/d/1JRslRKcLNnMpxGNvuXzU4hbyONH8tjxEUa6ieDpuAvw/edit?usp=drive_link)
