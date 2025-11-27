@@ -43,6 +43,12 @@ namespace ReservasAPI.Controllers
             return "Cambio subido desde Releases Azure DevOps 2";
         }
 
+        [HttpGet("new-deployment-FMU")]
+        public string NewPipeline2()
+        {
+            return "Cambio subido desde Releases Azure DevOps FMU";
+        }
+
 
         // GET api/reserva/5
         [HttpGet("{id}")]
